@@ -32,7 +32,10 @@
       "Bash(git config user.email \"ayaan@nvda-dcf.com\")",
       "Bash(git config user.name \"Ayaan Sanghrajka\")",
       "Bash(git commit:*)",
-      "Bash(git add .claude/settings.local.json)"
+      "Bash(git add .claude/settings.local.json)",
+      "Bash(vercel --version)",
+      "Bash(vercel deploy --yes)",
+      "Bash(git remote add origin https://github.com/AyaanSanghrajka/nvda-dcf.git)"
     ]
   }
 }
