@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(command -v node.exe)",
+      "Bash(powershell.exe -NoProfile -Command \"node --version; npm --version\")",
+      "Bash(powershell.exe -NoProfile -Command \"winget --version\")",
+      "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(powershell.exe -NoProfile -Command \":*)",
+      "Bash(powershell.exe -NoProfile -Command \"Start-Sleep 6; \\(Invoke-WebRequest -Uri ''http://localhost:5173'' -UseBasicParsing -TimeoutSec 5\\).StatusCode\")",
+      "Bash(powershell.exe -NoProfile -Command \"netstat -ano | findstr :5173\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-Process | Where-Object { $_.MainWindowTitle -like ''*vite*'' -or $_.ProcessName -eq ''node'' } | Stop-Process -Force -ErrorAction SilentlyContinue; netstat -ano | findstr :5173\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Start-Sleep 1; netstat -ano | findstr :5173\")",
+      "Bash(powershell.exe -NoProfile -Command \"Start-Sleep 4; netstat -ano | findstr :5173\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-ChildItem ''C:\\\\Users\\\\ayaan\\\\AppData\\\\Roaming\\\\npm\\\\'' -ErrorAction SilentlyContinue | Select-Object Name\")",
+      "Bash(powershell.exe -NoProfile -Command \"Get-ChildItem ''C:\\\\Users\\\\ayaan\\\\AppData\\\\Local\\\\AnthropicClaude\\\\'' -ErrorAction SilentlyContinue -Depth 1 | Select-Object FullName\")",
+      "Bash(powershell.exe -NoProfile -Command \"ls C:\\\\Users\\\\ayaan\\\\AppData\\\\Roaming\\\\npm\\\\ 2>nul\")",
+      "Bash(powershell.exe -NoProfile -Command \"Test-Path ''C:\\\\Users\\\\ayaan\\\\AppData\\\\Roaming\\\\Claude\\\\claude-code\\\\2.1.51\\\\claude.exe''\")",
+      "Bash(/c/Users/ayaan/AppData/Roaming/Claude/claude-code/2.1.51/claude.exe --version)",
+      "Bash(powershell.exe -NoProfile -Command \"Get-ChildItem ''C:\\\\Users\\\\ayaan\\\\AppData\\\\Roaming\\\\Claude\\\\claude-code\\\\2.1.51\\\\'' | Select-Object Name, Length, Attributes\")",
+      "Bash(powershell.exe -NoProfile -Command \"\\(Get-Item ''C:\\\\Users\\\\ayaan\\\\AppData\\\\Roaming\\\\Claude\\\\claude-code\\\\2.1.51\\\\claude.exe''\\).FullName\")",
+      "Bash(powershell.exe -NoProfile -Command \"cmd /c ''C:\\\\Users\\\\ayaan\\\\AppData\\\\Roaming\\\\Claude\\\\claude-code\\\\2.1.51\\\\claude.exe'' --version\")",
+      "Bash(powershell.exe -NoProfile -Command \"where.exe git 2>nul; where.exe gh 2>nul\")",
+      "Bash(npm install -g vercel)",
+      "Bash(git init)",
+      "Bash(git add .)",
+      "Bash(git commit -m \"Initial commit: NVIDIA DCF valuation app\")",
+      "Bash(git rm -r --cached node_modules)",
+      "Bash(git config user.email \"ayaan@nvda-dcf.com\")",
+      "Bash(git config user.name \"Ayaan Sanghrajka\")"
+    ]
+  }
+}

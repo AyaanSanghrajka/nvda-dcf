@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.env
+.env.local
+C:/vite-nvda.cmd
