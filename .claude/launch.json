@@ -6,6 +6,12 @@
       "runtimeExecutable": "C:\\Windows\\System32\\cmd.exe",
       "runtimeArgs": ["/c", "C:\\vite-nvda.cmd"],
       "port": 5173
+    },
+    {
+      "name": "stockpulse",
+      "runtimeExecutable": "C:\\Windows\\System32\\cmd.exe",
+      "runtimeArgs": ["/c", "C:\\Users\\ayaan\\OneDrive\\Desktop\\Claude code\\vite-stockpulse.cmd"],
+      "port": 5173
     }
   ]
 }
