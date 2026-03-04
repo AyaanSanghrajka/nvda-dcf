@@ -35,7 +35,12 @@
       "Bash(git add .claude/settings.local.json)",
       "Bash(vercel --version)",
       "Bash(vercel deploy --yes)",
-      "Bash(git remote add origin https://github.com/AyaanSanghrajka/nvda-dcf.git)"
+      "Bash(git remote add origin https://github.com/AyaanSanghrajka/nvda-dcf.git)",
+      "Bash(git push https://AyaanSanghrajka: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@github.com/AyaanSanghrajka/nvda-dcf.git master)",
+      "Bash(vercel deploy --yes --token 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)",
+      "Bash(npm run build)",
+      "Bash(git checkout -b feature/stockpulse-app)",
+      "Bash(git add .claude/settings.local.json stockpulse/)"
     ]
   }
 }
