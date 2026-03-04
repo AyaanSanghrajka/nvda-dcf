@@ -30,7 +30,9 @@
       "Bash(git commit -m \"Initial commit: NVIDIA DCF valuation app\")",
       "Bash(git rm -r --cached node_modules)",
       "Bash(git config user.email \"ayaan@nvda-dcf.com\")",
-      "Bash(git config user.name \"Ayaan Sanghrajka\")"
+      "Bash(git config user.name \"Ayaan Sanghrajka\")",
+      "Bash(git commit:*)",
+      "Bash(git add .claude/settings.local.json)"
     ]
   }
 }
