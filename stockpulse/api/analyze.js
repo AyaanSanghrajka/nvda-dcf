@@ -8,9 +8,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Please enter a valid ticker symbol (e.g. AAPL, TSLA).' });
   }
   if (!process.env.FINNHUB_API_KEY || !process.env.GROQ_API_KEY) {
-    return res.status(500).json({
-      error: 'API keys are not configured. Add FINNHUB_API_KEY and GROQ_API_KEY to your environment variables.',
-    });
+    return res.status(500).json({ error: 'API keys are not configured.' });
   }
   try {
     const now = new Date();
@@ -24,7 +22,7 @@ export default async function handler(req, res) {
     const news = await newsRes.json();
     const quote = await quoteRes.json();
     if (!Array.isArray(news) || news.length === 0) {
-      return res.status(404).json({ error: `No recent news found for "${ticker}". Double-check the ticker symbol and try again.` });
+      return res.status(404).json({ error: `No recent news found for "${ticker}".` });
     }
     const topNews = news.slice(0, 7);
     const newsText = topNews
@@ -41,32 +39,38 @@ export default async function handler(req, res) {
         max_tokens: 1024,
         messages: [{
           role: 'system',
-          content: 'You are a financial analyst. You must respond with ONLY a valid JSON object. No markdown, no explanation, no code blocks. Just raw JSON.',
+          content: 'You are a financial analyst. Respond with ONLY raw JSON, no markdown, no code blocks.',
         }, {
           role: 'user',
-          content: `Analyze these news articles about ${ticker} and return a JSON object with exactly these fields: whatHappened (string), bullCase (array of 3 strings), bearCase (array of 3 strings).\n\n${newsText}`,
+          content: `Analyze news about ${ticker}. Return JSON: {"whatHappened":"string","bullCase":["a","b","c"],"bearCase":["a","b","c"]}\n\n${newsText}`,
         }],
       }),
     });
-    const groqData = await groqRes.json();
+    const rawText = await groqRes.text();
+    console.log('Groq status:', groqRes.status);
+    console.log('Groq raw response:', rawText.substring(0, 500));
+    let groqData;
+    try {
+      groqData = JSON.parse(rawText);
+    } catch {
+      return res.status(500).json({ error: 'Groq returned non-JSON: ' + rawText.substring(0, 200) });
+    }
     let analysis;
     try {
       const raw = groqData.choices[0].message.content.trim();
       const jsonMatch = raw.match(/\{[\s\S]*\}/);
       analysis = JSON.parse(jsonMatch ? jsonMatch[0] : raw);
     } catch (e) {
-      console.error('Parse error:', groqData.choices[0].message.content);
-      return res.status(500).json({ error: 'The AI returned an unexpected format. Please try again.' });
+      return res.status(500).json({ error: 'Parse failed: ' + groqData.choices[0].message.content.substring(0, 200) });
     }
     return res.status(200).json({
-      ticker,
-      analysis,
+      ticker, analysis,
       quote: quote && quote.c ? { price: quote.c, change: quote.d, changePercent: quote.dp } : null,
       newsCount: topNews.length,
       articles: topNews.map((n) => ({ headline: n.headline, source: n.source, url: n.url, datetime: n.datetime })),
     });
   } catch (err) {
     console.error('Analyze error:', err);
-    return res.status(500).json({ error: 'Analysis failed. Please try again in a moment.' });
+    return res.status(500).json({ error: 'Analysis failed: ' + err.message });
   }
 }
